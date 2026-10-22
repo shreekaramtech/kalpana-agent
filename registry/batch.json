@@ -1,0 +1,23 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "one.kalpana/batch",
+  "title": "Kalpana Batch",
+  "description": "Fill templates from product data and render banners, ads and listing images in bulk.",
+  "version": "1.0.0",
+  "websiteUrl": "https://kalpana.one/mcp",
+  "icons": [
+    {
+      "src": "https://kalpana.one/logo.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "500x500"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.kalpana.one/mcp/batch"
+    }
+  ]
+}

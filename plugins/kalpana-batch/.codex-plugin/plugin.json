@@ -1,25 +1,27 @@
 {
-  "name": "kalpana-one",
-  "version": "1.1.0",
-  "description": "Fill your Kalpana One templates from a list or spreadsheet and render personalized banners, ads and listing images in bulk.",
+  "name": "kalpana-batch",
+  "version": "1.0.0",
+  "description": "Fill your Kalpana templates from a list or spreadsheet and render personalized banners, ads, listing images and videos in bulk, after checking every row.",
   "author": {
     "name": "Shreekaram Technologies",
     "email": "support@kalpana.one",
     "url": "https://kalpana.one"
   },
-  "homepage": "https://kalpana.one",
-  "repository": "https://github.com/shreekaramtech/kalpana-one-agent",
+  "homepage": "https://kalpana.one/mcp",
+  "repository": "https://github.com/shreekaramtech/kalpana-agent",
   "keywords": [
     "creative automation",
+    "bulk images",
+    "banners",
+    "ads",
     "templates",
-    "batch rendering",
-    "marketing"
+    "batch rendering"
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Kalpana One",
-    "shortDescription": "Personalized visual campaigns",
-    "longDescription": "Find your Kalpana still-image templates, turn a list or spreadsheet into validated personalized rows, create a draft batch, run it after confirming the credit cost, and retrieve the generated images.",
+    "displayName": "Kalpana Batch",
+    "shortDescription": "Bulk creatives from your data",
+    "longDescription": "Find your Kalpana templates, turn a list or spreadsheet into checked rows, create a draft batch, run it after confirming the exact credit cost, and fetch the finished images or videos. One connection covers one workspace, within your role there.",
     "developerName": "Shreekaram Technologies",
     "logo": "./assets/logo.png",
     "composerIcon": "./assets/composer-icon.png",
@@ -34,7 +36,7 @@
     "defaultPrompt": [
       "Show my latest Kalpana batches and their status.",
       "Find a Kalpana template for my next campaign.",
-      "Help me create a personalized creative batch."
+      "Fill the sale banner for these products and show me the cost."
     ],
     "brandColor": "#008568"
   },

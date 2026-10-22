@@ -1,0 +1,24 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  skills-in-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: plugin skills match skills/
+        run: |
+          ./scripts/sync-skills.sh
+          git diff --exit-code -- plugins
+      - name: manifests are valid JSON
+        run: |
+          for f in $(git ls-files '*.json' '.claude-plugin/*.json' 'plugins/**/*.json'); do
+            node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" || { echo "invalid: $f"; exit 1; }
+          done

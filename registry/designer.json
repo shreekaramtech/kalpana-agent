@@ -1,0 +1,23 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "one.kalpana/designer",
+  "title": "Kalpana Designer",
+  "description": "Design editable social, banner and ad templates from a brief, checked by rendering.",
+  "version": "1.0.0",
+  "websiteUrl": "https://kalpana.one/mcp/designer",
+  "icons": [
+    {
+      "src": "https://kalpana.one/logo.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "500x500"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.kalpana.one/mcp/designer"
+    }
+  ]
+}

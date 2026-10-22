@@ -1,8 +1,8 @@
-# Kalpana One agent plugin
+# Kalpana for AI agents
 
-Let Claude, ChatGPT, Cursor or any MCP client design [Kalpana One](https://kalpana.one) templates from a brief, then fill them from a list or spreadsheet and render personalized banners, ads and listing images in bulk.
+Let Claude, ChatGPT, Cursor or any MCP client design [Kalpana](https://kalpana.one) templates from a brief, then fill them from a list or spreadsheet and render personalized banners, ads and listing images in bulk.
 
-This repository holds the plugin, its skills and the client configuration for Kalpana One's two hosted MCP servers. It contains no credentials: every user signs in with their own Kalpana account.
+This repository holds Kalpana's agent plugins, skills and client configuration for its two hosted MCP servers. It contains no credentials: every user signs in with their own Kalpana account.
 
 | Server | URL | For |
 | --- | --- | --- |
@@ -16,8 +16,9 @@ This repository holds the plugin, its skills and the client configuration for Ka
 **Claude Code**
 
 ```
-/plugin marketplace add shreekaramtech/kalpana-one-agent
-/plugin install kalpana-one@kalpana-one
+/plugin marketplace add shreekaramtech/kalpana-agent
+/plugin install kalpana-batch@kalpana
+/plugin install kalpana-designer@kalpana
 ```
 
 Or connect the servers alone:
@@ -25,6 +26,18 @@ Or connect the servers alone:
 ```
 claude mcp add --transport http kalpana https://mcp.kalpana.one/mcp/batch
 claude mcp add --transport http kalpana-designer https://mcp.kalpana.one/mcp/designer
+```
+
+**Gemini CLI**
+
+```
+gemini extensions install https://github.com/shreekaramtech/kalpana-agent
+```
+
+**Skills only (Cursor, Windsurf, Codex and other agents that read skills)**
+
+```
+npx skills add shreekaramtech/kalpana-agent
 ```
 
 **Claude, ChatGPT and other clients**
@@ -68,15 +81,17 @@ Add a custom connector with either URL above. The client opens Kalpana's sign-in
 ## Layout
 
 ```
-.claude-plugin/plugin.json        Claude plugin manifest
-.claude-plugin/marketplace.json   lets this repository act as its own Claude marketplace
-.codex-plugin/plugin.json         Codex and ChatGPT plugin manifest
-.mcp.json                         Claude Code server config (both hosted servers, OAuth)
-plugin.json, mcp.json             agent-plugins.org manifest and config (Cursor; batch server)
-skills/create-creative-batch/     filling templates with data
-skills/design-a-template/         designing templates
+.claude-plugin/marketplace.json   lists both plugins (Claude Code marketplace)
+plugins/kalpana-batch/            batch plugin: Claude and Codex manifests, server config, skill
+plugins/kalpana-designer/         designer plugin: Claude and Codex manifests, server config, skill
+skills/                           the skills (source; scripts/sync-skills.sh copies them into the plugins)
+gemini-extension.json, GEMINI.md  Gemini CLI extension with both servers
+registry/                         MCP Registry entries, one per server
+glama.json                        Glama ownership
 assets/                           logos
 ```
+
+Edit skills in `skills/`, then run `./scripts/sync-skills.sh`. CI fails when a plugin's copy differs.
 
 ## Links
 

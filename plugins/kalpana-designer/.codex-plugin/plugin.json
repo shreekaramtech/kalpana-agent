@@ -1,0 +1,45 @@
+{
+  "name": "kalpana-designer",
+  "version": "1.0.0",
+  "description": "Design editable Kalpana templates from a brief: layers, layout flows, charts and motion, checked by rendering, ready to fill with data in bulk.",
+  "author": {
+    "name": "Shreekaram Technologies",
+    "email": "support@kalpana.one",
+    "url": "https://kalpana.one"
+  },
+  "homepage": "https://kalpana.one/mcp/designer",
+  "repository": "https://github.com/shreekaramtech/kalpana-agent",
+  "keywords": [
+    "design",
+    "templates",
+    "social posts",
+    "banners",
+    "motion",
+    "creative automation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Kalpana Designer",
+    "shortDescription": "Design templates from a brief",
+    "longDescription": "Give a brief (intent, platforms, brand) and the agent builds an editable template in your Kalpana workspace: layout flows, text that fits, your fonts, logos and product photos, charts, shapes and motion. It checks the layout and renders previews before handing the template over, ready for bulk rendering with Kalpana Batch. Needs an active Kalpana plan.",
+    "developerName": "Shreekaram Technologies",
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/composer-icon.png",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://kalpana.one",
+    "privacyPolicyURL": "https://kalpana.one/privacy",
+    "termsOfServiceURL": "https://kalpana.one/terms",
+    "defaultPrompt": [
+      "Design a 1080x1080 sale post for my brand with a product photo, price and call to action.",
+      "Make a story-size copy of my latest template.",
+      "Turn this template into a five-page carousel."
+    ],
+    "brandColor": "#008568"
+  },
+  "mcpServers": "./.mcp.json",
+  "license": "MIT"
+}
