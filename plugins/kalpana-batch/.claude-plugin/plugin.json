@@ -8,6 +8,7 @@
     "url": "https://kalpana.one"
   },
   "homepage": "https://kalpana.one/mcp",
+  "privacyPolicyUrl": "https://kalpana.one/privacy",
   "repository": "https://github.com/shreekaramtech/kalpana-agent",
   "license": "MIT",
   "keywords": [
