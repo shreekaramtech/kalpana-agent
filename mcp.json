@@ -3,7 +3,7 @@
   "mcpServers": {
     "kalpana": {
       "type": "streamable-http",
-      "url": "https://mcp.kalpana.one/mcp"
+      "url": "https://mcp.kalpana.one/mcp/batch"
     }
   }
 }

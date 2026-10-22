@@ -2,7 +2,11 @@
   "mcpServers": {
     "kalpana": {
       "type": "http",
-      "url": "https://mcp.kalpana.one/mcp"
+      "url": "https://mcp.kalpana.one/mcp/batch"
+    },
+    "kalpana-designer": {
+      "type": "http",
+      "url": "https://mcp.kalpana.one/mcp/designer"
     }
   }
 }

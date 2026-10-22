@@ -1,7 +1,7 @@
 {
   "name": "kalpana-one",
-  "version": "1.0.0",
-  "description": "Fill your Kalpana One templates from a list or spreadsheet and render personalized banners, ads and listing images in bulk.",
+  "version": "1.1.0",
+  "description": "Design editable Kalpana One templates from a brief, then fill them from a list or spreadsheet and render personalized banners, ads and listing images in bulk.",
   "author": {
     "name": "Shreekaram Technologies",
     "email": "support@kalpana.one",
@@ -18,6 +18,7 @@
     "bulk image generation",
     "banners",
     "ads",
-    "templates"
+    "templates",
+    "design"
   ]
 }
