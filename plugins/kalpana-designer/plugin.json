@@ -48,31 +48,31 @@
         "test_cases": {
           "positive": [
             {
-              "description": "Design a post from a brief. Passes when a new 1080x1080 page exists with layers named for their content and a preview is shown. Setup: sign in with the reviewer account and choose the Review Store workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
+              "description": "Design a post from a brief. Passes when a new 1080x1080 page exists with layers named for their content and a preview is shown. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
               "prompt": "Design a 1080x1080 Diwali sale post for Review Store with a product photo from the Review Products collection, a headline, the price ₹2,499 and a Shop now button.",
               "tools_triggered": "design_guide, list_fonts, find_images, create_design, create_layers, check_layout, render_design",
               "expected_behavior": "Creates a new 1080x1080 page in the workspace with layers named for what they hold (Headline, Price, Product photo, button), checks the layout, fixes any issue it reports, and shows a preview of the finished post."
             },
             {
-              "description": "Preview an existing template without changing it. Passes when a preview image is shown and the template is unchanged. Setup: sign in with the reviewer account and choose the Review Store workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
+              "description": "Preview an existing template without changing it. Passes when a preview image is shown and the template is unchanged. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
               "prompt": "Show me a preview of my Diwali Sale Banner template.",
               "tools_triggered": "search_templates, pages, render_design",
               "expected_behavior": "Finds the template, lists its page, and shows a preview image of it. Nothing changes."
             },
             {
-              "description": "Make another size of an existing design. Passes when the template gains a 1080x1920 page and its preview is shown. Setup: sign in with the reviewer account and choose the Review Store workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
+              "description": "Make another size of an existing design. Passes when the template gains a 1080x1920 page and its preview is shown. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
               "prompt": "Make a 1080x1920 story version of the Diwali Sale Banner and fix anything that doesn't fit.",
               "tools_triggered": "search_templates, pages, duplicate, render_design, check_layout, update_layers",
               "expected_behavior": "Adds a 1080x1920 copy of the page to the same template, renders it, adjusts what the new size needs, and shows the result."
             },
             {
-              "description": "Add motion and check it as frames. Passes when the two layers have motion and a contact sheet is shown. Setup: sign in with the reviewer account and choose the Review Store workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
+              "description": "Add motion and check it as frames. Passes when the two layers have motion and a contact sheet is shown. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
               "prompt": "On the Diwali Sale Banner, fade in the headline and pop in the price, then show me the frames.",
               "tools_triggered": "search_templates, pages, animate, render_contact_sheet",
               "expected_behavior": "Adds the two motions to the named layers and shows a contact sheet of frames so the timing can be checked."
             },
             {
-              "description": "Name a template and describe its inputs. Passes when the template is saved under the new name with a description per input. Setup: sign in with the reviewer account and choose the Review Store workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
+              "description": "Name a template and describe its inputs. Passes when the template is saved under the new name with a description per input. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
               "prompt": "Name the Diwali Sale Banner template \"Diwali Sale Post\", describe it, and give each input a length limit.",
               "tools_triggered": "search_templates, set_template_info",
               "expected_behavior": "Saves the template with the new name, a one or two sentence description, and a description per input with its length limit (for example, Headline up to 2 lines). Returns the template's link."
