@@ -55,13 +55,13 @@
             },
             {
               "description": "Check rows against a template without creating anything. Passes when both rows are reported valid and no batch exists afterwards. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
-              "prompt": "Fill the Diwali Sale Banner for Red Sneaker at ₹2,499 and Blue Mug at ₹499, using their photos from the Review Products collection. Check the rows but don't create anything yet.",
+              "prompt": "Fill the Diwali Sale Banner for Sage Sneakers at ₹2,499 and Cream Kettle at ₹1,499, using their photos from the Review Products collection. Check the rows but don't create anything yet.",
               "tools_triggered": "search_templates, get_template_inputs, search_assets, validate_batch",
               "expected_behavior": "Finds the template and the two photos, builds two rows keyed by layer name, and reports that both rows are valid (or what to fix). No batch is created."
             },
             {
               "description": "Create a draft batch and report its exact cost without rendering. Passes when one draft batch exists and run_batch was not called. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
-              "prompt": "Create a draft batch of the Diwali Sale Banner for Desk Lamp at ₹1,299 with desk-lamp.jpg, and tell me what rendering it would cost. Don't render it.",
+              "prompt": "Create a draft batch of the Diwali Sale Banner for Table Lamp at ₹1,299 with table-lamp.png, and tell me what rendering it would cost. Don't render it.",
               "tools_triggered": "search_templates, get_template_inputs, validate_batch, create_batch",
               "expected_behavior": "Asks for confirmation before creating, then creates a draft batch with one job and states the exact credit cost returned by create_batch. It does not call run_batch."
             },
@@ -72,10 +72,10 @@
               "expected_behavior": "Finds the draft, states its exact credit cost and waits for an explicit yes. After the yes it runs the batch, follows its progress and returns a download link for each finished image."
             },
             {
-              "description": "Edit one job in a draft batch. Passes when only the Blue Mug job's Price changes and nothing renders. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
-              "prompt": "In my latest draft batch, change the Blue Mug price to ₹449.",
+              "description": "Edit one job in a draft batch. Passes when only the Cream Kettle job's Price changes and nothing renders. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
+              "prompt": "In my latest draft batch, change the Cream Kettle price to ₹1,349.",
               "tools_triggered": "list_batches, get_batch_jobs, update_job",
-              "expected_behavior": "Finds the Blue Mug job, confirms the change, updates only its Price, and shows the new value. Nothing is rendered."
+              "expected_behavior": "Finds the Cream Kettle job, confirms the change, updates only its Price, and shows the new value. Nothing is rendered."
             }
           ],
           "negative": [
@@ -85,7 +85,7 @@
             },
             {
               "description": "Kalpana fills templates; it does not generate new images with an AI model. Expected: no Kalpana Batch tool is called and the plugin is not said to have made the photo.",
-              "prompt": "Generate a photo of a model wearing a red sneaker on a beach."
+              "prompt": "Generate a photo of a model wearing sage sneakers on a beach."
             },
             {
               "description": "Posting or scheduling on a social network is outside the plugin. Expected: no Kalpana Batch tool is called and nothing is said to have been posted.",
