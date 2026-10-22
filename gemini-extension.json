@@ -4,7 +4,7 @@
   "description": "Design Kalpana templates from a brief, then fill them from your data and render creatives in bulk, from Gemini CLI.",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
-    "kalpana": {
+    "kalpana-batch": {
       "httpUrl": "https://mcp.kalpana.one/mcp/batch",
       "oauth": {
         "enabled": true

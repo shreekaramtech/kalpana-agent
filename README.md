@@ -24,7 +24,7 @@ This repository holds Kalpana's agent plugins, skills and client configuration f
 Or connect the servers alone:
 
 ```
-claude mcp add --transport http kalpana https://mcp.kalpana.one/mcp/batch
+claude mcp add --transport http kalpana-batch https://mcp.kalpana.one/mcp/batch
 claude mcp add --transport http kalpana-designer https://mcp.kalpana.one/mcp/designer
 ```
 
@@ -49,7 +49,7 @@ Add a custom connector with either URL above. The client opens Kalpana's sign-in
 ```json
 {
   "mcpServers": {
-    "kalpana": {
+    "kalpana-batch": {
       "type": "http",
       "url": "https://mcp.kalpana.one/mcp/batch"
     },
@@ -82,8 +82,9 @@ Add a custom connector with either URL above. The client opens Kalpana's sign-in
 
 ```
 .claude-plugin/marketplace.json   lists both plugins (Claude Code marketplace)
-plugins/kalpana-batch/            batch plugin: Claude and Codex manifests, server config, skill
-plugins/kalpana-designer/         designer plugin: Claude and Codex manifests, server config, skill
+plugins/kalpana-batch/            batch plugin: Claude (.claude-plugin, .mcp.json), ChatGPT (plugin.json,
+                                  mcp.json) and Codex (.codex-plugin) manifests, skill, logos
+plugins/kalpana-designer/         designer plugin, laid out the same way
 skills/                           the skills (source; scripts/sync-skills.sh copies them into the plugins)
 gemini-extension.json, GEMINI.md  Gemini CLI extension with both servers
 registry/                         MCP Registry entries, one per server
@@ -92,6 +93,8 @@ assets/                           logos
 ```
 
 Edit skills in `skills/`, then run `./scripts/sync-skills.sh`. CI fails when a plugin's copy differs.
+
+To submit a plugin to the ChatGPT directory, build its ZIP with `./scripts/zip-plugin.sh kalpana-batch` (or `kalpana-designer`); it writes `dist/<name>.zip`. Keep the listing in `plugin.json` and `.codex-plugin/plugin.json` the same; CI checks it.
 
 ## Links
 

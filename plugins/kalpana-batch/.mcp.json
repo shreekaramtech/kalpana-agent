@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "kalpana": {
+    "kalpana-batch": {
       "type": "http",
       "url": "https://mcp.kalpana.one/mcp/batch"
     }

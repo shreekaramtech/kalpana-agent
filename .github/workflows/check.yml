@@ -22,3 +22,13 @@ jobs:
           for f in $(git ls-files '*.json' '.claude-plugin/*.json' 'plugins/**/*.json'); do
             node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" || { echo "invalid: $f"; exit 1; }
           done
+      - name: ChatGPT listing is the same in plugin.json and .codex-plugin
+        run: |
+          for p in plugins/*/; do
+            node -e "
+              const fs = require('fs');
+              const a = JSON.parse(fs.readFileSync('${p}plugin.json', 'utf8')).extensions['com.openai'].interface;
+              const b = JSON.parse(fs.readFileSync('${p}.codex-plugin/plugin.json', 'utf8')).interface;
+              if (JSON.stringify(a) !== JSON.stringify(b)) { console.error('${p}: interfaces differ'); process.exit(1); }
+            "
+          done
