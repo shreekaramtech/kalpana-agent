@@ -24,16 +24,17 @@
       "interface": {
         "displayName": "Kalpana Batch",
         "shortDescription": "Bulk creatives from your data",
-        "longDescription": "Find your Kalpana templates, turn a list or spreadsheet into checked rows, create a draft batch, run it after confirming the exact credit cost, and fetch the finished images or videos. One connection covers one workspace, within your role there.",
+        "longDescription": "Kalpana Batch turns a list or spreadsheet into personalized marketing images and videos: one finished banner, ad or listing image per row, from your Kalpana templates. Find a template, turn your data into checked rows, create a draft batch, run it after confirming the exact credit cost, and fetch the finished files. One connection covers one workspace, within your role there.",
         "developerName": "Shreekaram Technologies",
         "logo": "./assets/logo.png",
         "composerIcon": "./assets/composer-icon.png",
-        "category": "Productivity",
+        "category": "Creativity",
         "capabilities": [
           "Read",
           "Write"
         ],
         "websiteURL": "https://kalpana.one",
+        "supportURL": "https://kalpana.one/contact",
         "privacyPolicyURL": "https://kalpana.one/privacy",
         "termsOfServiceURL": "https://kalpana.one/terms",
         "defaultPrompt": [
