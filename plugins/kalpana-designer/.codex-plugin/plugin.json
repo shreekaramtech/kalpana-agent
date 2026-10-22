@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "Kalpana Designer",
     "shortDescription": "Design templates from a brief",
-    "longDescription": "Kalpana Designer creates editable marketing designs (social posts, banners, ads, carousels and slides) from a brief. Give the intent, platforms and brand, and it builds the design in your Kalpana workspace: layout flows, text that fits, your fonts, logos and product photos, charts, shapes and motion. It checks the layout and renders previews before handing over a template that is ready for bulk rendering with Kalpana Batch. Needs an active Kalpana plan.",
+    "longDescription": "Kalpana Designer creates editable marketing designs (social posts, banners, ads, carousels and slides) from a brief. Give the intent, platforms and brand, and it builds the design in your Kalpana workspace: layout flows, text that fits, your fonts, logos and product photos, charts, shapes and motion. It checks the layout and renders previews before handing over a template that is ready for bulk rendering with Kalpana Batch.",
     "developerName": "Shreekaram Technologies",
     "logo": "./assets/logo.png",
     "composerIcon": "./assets/composer-icon.png",
@@ -35,7 +35,7 @@
     "privacyPolicyURL": "https://kalpana.one/privacy",
     "termsOfServiceURL": "https://kalpana.one/terms",
     "defaultPrompt": [
-      "Design a 1080x1080 sale post for my brand with a product photo, price and call to action.",
+      "Design a 1080x1080 post for my brand's new product with a photo, headline and call to action.",
       "Make a story-size copy of my latest template.",
       "Turn this template into a five-page carousel."
     ],

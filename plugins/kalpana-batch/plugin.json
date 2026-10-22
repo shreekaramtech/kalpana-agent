@@ -24,7 +24,7 @@
       "interface": {
         "displayName": "Kalpana Batch",
         "shortDescription": "Bulk creatives from your data",
-        "longDescription": "Kalpana Batch turns a list or spreadsheet into personalized marketing images and videos: one finished banner, ad or listing image per row, from your Kalpana templates. Find a template, turn your data into checked rows, create a draft batch, run it after confirming the exact credit cost, and fetch the finished files. One connection covers one workspace, within your role there.",
+        "longDescription": "Kalpana Batch turns a list or spreadsheet into personalized marketing images and videos: one finished banner, ad or listing image per row, from your Kalpana templates. Find a template, turn your data into checked rows, create a draft batch, render it once you approve, and fetch the finished files. One connection covers one workspace, within your role there.",
         "developerName": "Shreekaram Technologies",
         "logo": "./assets/logo.png",
         "composerIcon": "./assets/composer-icon.png",
@@ -40,7 +40,7 @@
         "defaultPrompt": [
           "Show my latest Kalpana batches and their status.",
           "Find a Kalpana template for my next campaign.",
-          "Fill the sale banner for these products and show me the cost."
+          "Fill the summer banner for these three products and show me a preview."
         ],
         "brandColor": "#008568"
       }
