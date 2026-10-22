@@ -51,11 +51,11 @@
               "description": "Browse the workspace's templates and one template's inputs. Passes when the inputs listed match the template. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
               "prompt": "Show me the templates in my Kalpana workspace and what the Diwali Sale Banner needs filled in.",
               "tools_triggered": "search_templates, get_template_inputs",
-              "expected_behavior": "Lists the workspace's templates with their names and sizes, then names the Diwali Sale Banner's inputs (Headline, Price, Product photo) with their types. Nothing is created and no credits are spent."
+              "expected_behavior": "Lists the workspace's templates with their names and sizes, then names the Diwali Sale Banner's inputs (Headline, Price, Product photo, Tag, CTA and Logo) with their types. Nothing is created and no credits are spent."
             },
             {
               "description": "Check rows against a template without creating anything. Passes when both rows are reported valid and no batch exists afterwards. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
-              "prompt": "Fill the Diwali Sale Banner for Sage Sneakers at ₹2,499 and Cream Kettle at ₹1,499, using their photos from the Review Products collection. Check the rows but don't create anything yet.",
+              "prompt": "Fill the Diwali Sale Banner for Burgundy Tote at ₹2,499 and Cream Kettle at ₹1,499, using their photos from the Review Products collection. Check the rows but don't create anything yet.",
               "tools_triggered": "search_templates, get_template_inputs, search_assets, validate_batch",
               "expected_behavior": "Finds the template and the two photos, builds two rows keyed by layer name, and reports that both rows are valid (or what to fix). No batch is created."
             },
@@ -85,7 +85,7 @@
             },
             {
               "description": "Kalpana fills templates; it does not generate new images with an AI model. Expected: no Kalpana Batch tool is called and the plugin is not said to have made the photo.",
-              "prompt": "Generate a photo of a model wearing sage sneakers on a beach."
+              "prompt": "Generate a photo of a model carrying a burgundy tote bag on a beach."
             },
             {
               "description": "Posting or scheduling on a social network is outside the plugin. Expected: no Kalpana Batch tool is called and nothing is said to have been posted.",

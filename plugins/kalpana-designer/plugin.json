@@ -51,7 +51,7 @@
               "description": "Design a post from a brief. Passes when a new 1080x1080 page exists with layers named for their content and a preview is shown. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
               "prompt": "Design a 1080x1080 Diwali sale post for Review Store with a product photo from the Review Products collection, a headline, the price ₹2,499 and a Shop now button.",
               "tools_triggered": "design_guide, list_fonts, find_images, create_design, create_layers, check_layout, render_design",
-              "expected_behavior": "Creates a new 1080x1080 page in the workspace with layers named for what they hold (Headline, Price, Product photo, button), checks the layout, fixes any issue it reports, and shows a preview of the finished post."
+              "expected_behavior": "Creates a new 1080x1080 page in the workspace with layers named for what they hold (Headline, Price, Product photo, CTA), checks the layout, fixes any issue it reports, and shows a preview of the finished post."
             },
             {
               "description": "Preview an existing template without changing it. Passes when a preview image is shown and the template is unchanged. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
