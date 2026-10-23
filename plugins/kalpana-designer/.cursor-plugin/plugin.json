@@ -1,0 +1,27 @@
+{
+  "name": "kalpana-designer",
+  "version": "1.0.0",
+  "description": "Design editable Kalpana templates from a brief: layers, layout flows, charts and motion, checked by rendering, ready to fill with data in bulk.",
+  "author": {
+    "name": "Shreekaram Technologies",
+    "email": "support@kalpana.one"
+  },
+  "homepage": "https://kalpana.one/mcp/designer",
+  "repository": "https://github.com/shreekaramtech/kalpana-agent",
+  "license": "MIT",
+  "keywords": [
+    "design",
+    "templates",
+    "social posts",
+    "banners",
+    "motion",
+    "creative automation"
+  ],
+  "logo": "assets/logo.png",
+  "skills": "./skills/",
+  "mcpServers": {
+    "kalpana-designer": {
+      "url": "https://mcp.kalpana.one/mcp/designer"
+    }
+  }
+}

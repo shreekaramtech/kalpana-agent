@@ -82,6 +82,7 @@ Add a custom connector with either URL above. The client opens Kalpana's sign-in
 
 ```
 .claude-plugin/marketplace.json   lists both plugins (Claude Code marketplace)
+.cursor-plugin/marketplace.json   lists both plugins for Cursor (each plugin has .cursor-plugin/plugin.json)
 plugins/kalpana-batch/            batch plugin: Claude (.claude-plugin, .mcp.json), ChatGPT (plugin.json,
                                   mcp.json) and Codex (.codex-plugin) manifests, skill, logos
 plugins/kalpana-designer/         designer plugin, laid out the same way
