@@ -20,7 +20,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Kalpana Designer",
-    "shortDescription": "Make ad creatives and social posts",
+    "shortDescription": "Ad creatives and social posts",
     "longDescription": "Kalpana Designer makes ad creatives, social media posts, banners, carousels and slides from a short brief. Say what the design is for, where it will run and what your brand looks like, and it builds an editable design in your Kalpana workspace with your fonts, logos and product photos. It checks the layout and previews the result before handing it over. Every design is ready to reuse: fill it with new text and images for each product or campaign with Kalpana Batch.",
     "developerName": "Shreekaram Technologies",
     "logo": "./assets/logo.png",

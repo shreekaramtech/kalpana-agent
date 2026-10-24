@@ -20,7 +20,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Kalpana Batch",
-    "shortDescription": "Bulk ad creatives from a spreadsheet",
+    "shortDescription": "Bulk ad creatives from data",
     "longDescription": "Kalpana Batch generates ad creatives, product images and banners in bulk from a spreadsheet or product list: one finished image or video per row, from your Kalpana designs. Pick a design, add your data, check every row and see the cost, then render once you approve and download the finished files. One connection covers one workspace, within your role there.",
     "developerName": "Shreekaram Technologies",
     "logo": "./assets/logo.png",
