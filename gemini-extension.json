@@ -1,6 +1,6 @@
 {
   "name": "kalpana",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Make ad creatives and social posts from a brief, then generate them in bulk from your data, from Gemini CLI.",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
