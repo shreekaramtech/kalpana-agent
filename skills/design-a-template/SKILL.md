@@ -40,6 +40,18 @@ Calls are paid from the workspace's render credits; the guide, maths and measuri
 - Try the longest copy you expect in the text layers, render, then put the sample copy back.
 - For other sizes, `duplicate` the finished page with the new width and height, render it, and change only what that size needs.
 
+## Colour maths
+
+Work colours out instead of guessing; do the sums in your head, in a scratch pad or with `calculate`.
+
+- **Contrast (WCAG).** For each colour, turn every channel (0-255) into x = c/255, then linear = x <= 0.04045 ? x/12.92 : ((x + 0.055)/1.055)^2.4. Luminance L = 0.2126 R + 0.7152 G + 0.0722 B. Contrast = (lighter L + 0.05) / (darker L + 0.05), from 1 to 21. Body text needs 4.5 or more; large text (24px+, or 18.66px+ bold) needs 3.
+- **Readable text on a colour.** Work out the contrast of white (L = 1) and of near-black (#111111, L ≈ 0.0056) on it and take the higher, or test the brand's own text colours the same way.
+- **Shades and tints.** Mixing a colour toward another by t moves each channel: c + (target - c) × t. A tint mixes toward white (255), a shade toward black (0). For a 50-900 scale with the colour at 500, tint by 0.92, 0.84, 0.68, 0.5, 0.26 for 50-400 and shade by 0.14, 0.3, 0.46, 0.62 for 600-900.
+- **When light text on a brand colour falls short**, use the brand's deeper shade of that colour rather than a new one.
+- `check_layout` reports text whose contrast falls short in the design itself; confirm with `render_design`.
+
+Example: white on #FF5A1F. Channels 255, 90, 31 give linear 1, 0.102, 0.0137, so L = 0.2126 + 0.0731 + 0.0010 = 0.287. Contrast with white = 1.05 / 0.337 = 3.1: fine for a 32px headline, too low for 16px body text, so use a deeper shade or dark text.
+
 ## 5. Save and hand over
 
 - `set_template_info` last: a name, a one or two sentence description of the intent, audience and platforms, and a description per input with its length limit ("Headline: 2 lines, about 45 characters"). It saves every change.
