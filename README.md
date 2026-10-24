@@ -1,5 +1,12 @@
 # Kalpana for AI agents
 
+[![Kalpana Batch in the Claude Directory](https://img.shields.io/badge/Claude_Directory-Kalpana_Batch-D97757)](https://claude.ai/directory/kalpana-batch)
+[![Kalpana Designer in the Claude Directory](https://img.shields.io/badge/Claude_Directory-Kalpana_Designer-D97757)](https://claude.ai/directory/kalpana-designer)
+[![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/shreekaramtech/kalpana-agent)
+
+[![Kalpana Batch MCP connector](https://glama.ai/mcp/connectors/one.kalpana/batch/badges/score.svg)](https://glama.ai/mcp/connectors/one.kalpana/batch)
+[![Kalpana Designer MCP connector](https://glama.ai/mcp/connectors/one.kalpana/designer/badges/score.svg)](https://glama.ai/mcp/connectors/one.kalpana/designer)
+
 Let Claude, ChatGPT, Cursor or any MCP client design [Kalpana](https://kalpana.one) templates from a brief, then fill them from a list or spreadsheet and render personalized banners, ads and listing images in bulk.
 
 This repository holds Kalpana's agent plugins, skills and client configuration for its two hosted MCP servers. It contains no credentials: every user signs in with their own Kalpana account.
@@ -42,7 +49,7 @@ npx skills add shreekaramtech/kalpana-agent
 
 **Claude, ChatGPT and other clients**
 
-Add a custom connector with either URL above. The client opens Kalpana's sign-in page the first time it connects.
+In Claude, add [Kalpana Batch](https://claude.ai/directory/kalpana-batch) or [Kalpana Designer](https://claude.ai/directory/kalpana-designer) from the Claude Directory. In other clients, add a custom connector with either URL above. The client opens Kalpana's sign-in page the first time it connects.
 
 **Any MCP client (JSON config)**
 
