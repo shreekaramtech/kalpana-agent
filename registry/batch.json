@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "one.kalpana/batch",
   "title": "Kalpana Batch",
-  "description": "Fill templates from product data and render banners, ads and listing images in bulk.",
-  "version": "1.0.0",
+  "description": "Generate ad creatives and product images in bulk from a spreadsheet, for every product or campaign.",
+  "version": "1.0.1",
   "websiteUrl": "https://kalpana.one/mcp",
   "icons": [
     {

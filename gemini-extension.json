@@ -1,7 +1,7 @@
 {
   "name": "kalpana",
   "version": "1.0.0",
-  "description": "Design Kalpana templates from a brief, then fill them from your data and render creatives in bulk, from Gemini CLI.",
+  "description": "Make ad creatives and social posts from a brief, then generate them in bulk from your data, from Gemini CLI.",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
     "kalpana-batch": {

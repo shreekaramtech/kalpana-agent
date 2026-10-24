@@ -1,7 +1,7 @@
 {
   "name": "kalpana-batch",
   "version": "1.0.0",
-  "description": "Fill your Kalpana templates from a list or spreadsheet and render personalized banners, ads, listing images and videos in bulk, after checking every row.",
+  "description": "Generate ad creatives, product images and banners in bulk from a spreadsheet or product list: one finished image or video per row, for every product or campaign.",
   "author": {
     "name": "Shreekaram Technologies",
     "email": "support@kalpana.one",
@@ -20,8 +20,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Kalpana Batch",
-    "shortDescription": "Bulk creatives from your data",
-    "longDescription": "Kalpana Batch turns a list or spreadsheet into personalized marketing images and videos: one finished banner, ad or listing image per row, from your Kalpana templates. Find a template, turn your data into checked rows, create a draft batch, render it once you approve, and fetch the finished files. One connection covers one workspace, within your role there.",
+    "shortDescription": "Bulk ad creatives from a spreadsheet",
+    "longDescription": "Kalpana Batch generates ad creatives, product images and banners in bulk from a spreadsheet or product list: one finished image or video per row, from your Kalpana designs. Pick a design, add your data, check every row and see the cost, then render once you approve and download the finished files. One connection covers one workspace, within your role there.",
     "developerName": "Shreekaram Technologies",
     "logo": "./assets/logo.png",
     "composerIcon": "./assets/composer-icon.png",

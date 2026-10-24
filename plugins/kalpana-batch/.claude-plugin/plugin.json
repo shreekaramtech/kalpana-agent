@@ -1,7 +1,7 @@
 {
   "name": "kalpana-batch",
   "version": "1.0.0",
-  "description": "Fill your Kalpana templates from a list or spreadsheet and render personalized banners, ads, listing images and videos in bulk, after checking every row.",
+  "description": "Generate ad creatives, product images and banners in bulk from a spreadsheet or product list: one finished image or video per row, for every product or campaign.",
   "author": {
     "name": "Shreekaram Technologies",
     "email": "support@kalpana.one",

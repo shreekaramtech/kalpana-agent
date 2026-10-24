@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "kalpana-designer",
   "version": "1.0.0",
-  "description": "Design editable Kalpana templates from a brief: layers, layout flows, charts and motion, checked by rendering, ready to fill with data in bulk.",
+  "description": "Create ad creatives, social media posts, banners and carousels from a brief, as editable designs in Kalpana you can reuse for every campaign.",
   "author": {
     "name": "Shreekaram Technologies",
     "email": "support@kalpana.one",
@@ -23,8 +23,8 @@
     "com.openai": {
       "interface": {
         "displayName": "Kalpana Designer",
-        "shortDescription": "Design templates from a brief",
-        "longDescription": "Kalpana Designer creates editable marketing designs (social posts, banners, ads, carousels and slides) from a brief. Give the intent, platforms and brand, and it builds the design in your Kalpana workspace: layout flows, text that fits, your fonts, logos and product photos, charts, shapes and motion. It checks the layout and renders previews before handing over a template that is ready for bulk rendering with Kalpana Batch.",
+        "shortDescription": "Make ad creatives and social posts",
+        "longDescription": "Kalpana Designer makes ad creatives, social media posts, banners, carousels and slides from a short brief. Say what the design is for, where it will run and what your brand looks like, and it builds an editable design in your Kalpana workspace with your fonts, logos and product photos. It checks the layout and previews the result before handing it over. Every design is ready to reuse: fill it with new text and images for each product or campaign with Kalpana Batch.",
         "developerName": "Shreekaram Technologies",
         "logo": "./assets/logo.png",
         "composerIcon": "./assets/composer-icon.png",
