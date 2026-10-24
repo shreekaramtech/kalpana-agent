@@ -1,6 +1,6 @@
 {
   "name": "kalpana-batch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generate ad creatives, product images and banners in bulk from a spreadsheet or product list: one finished image or video per row, for every product or campaign.",
   "author": {
     "name": "Shreekaram Technologies",

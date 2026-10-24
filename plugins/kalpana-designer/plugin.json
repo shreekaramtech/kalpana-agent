@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "kalpana-designer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create ad creatives, social media posts, banners and carousels from a brief, as editable designs in Kalpana you can reuse for every campaign.",
   "author": {
     "name": "Shreekaram Technologies",
