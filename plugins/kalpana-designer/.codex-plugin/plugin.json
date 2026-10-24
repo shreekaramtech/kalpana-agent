@@ -57,19 +57,19 @@
             {
               "description": "Preview an existing template without changing it. Passes when a preview image is shown and the template is unchanged. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
               "prompt": "Show me a preview of my Diwali Sale Banner template.",
-              "tools_triggered": "search_templates, pages, render_design",
+              "tools_triggered": "search_templates, list_pages, render_design",
               "expected_behavior": "Finds the template, lists its page, and shows a preview image of it. Nothing changes."
             },
             {
               "description": "Make another size of an existing design. Passes when the template gains a 1080x1920 page and its preview is shown. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
               "prompt": "Make a 1080x1920 story version of the Diwali Sale Banner and fix anything that doesn't fit.",
-              "tools_triggered": "search_templates, pages, duplicate, render_design, check_layout, update_layers",
+              "tools_triggered": "search_templates, list_pages, duplicate, render_design, check_layout, update_layers",
               "expected_behavior": "Adds a 1080x1920 copy of the page to the same template, renders it, adjusts what the new size needs, and shows the result."
             },
             {
               "description": "Add motion and check it as frames. Passes when the two layers have motion and a contact sheet is shown. Setup: sign in with the reviewer account and choose the OpenAI Review workspace, which holds the Diwali Sale Banner and Product Story templates, the Review Products image collection and a three-row draft batch.",
               "prompt": "On the Diwali Sale Banner, fade in the headline and pop in the price, then show me the frames.",
-              "tools_triggered": "search_templates, pages, animate, render_contact_sheet",
+              "tools_triggered": "search_templates, list_pages, animate, render_contact_sheet",
               "expected_behavior": "Adds the two motions to the named layers and shows a contact sheet of frames so the timing can be checked."
             },
             {
