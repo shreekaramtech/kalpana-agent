@@ -29,6 +29,7 @@ Call `design_guide` once before the first design. It is the source of truth for 
 2. One `create_layers` call for the whole layer tree, children nested under their frames, each layer given an id and a name that says what it holds ("Headline", "Product photo", "Price"). Those names become the batch columns.
 3. Put a column layout flow on the page frame and let one part (usually the product) fill the space left, so longer copy or another size does not break the layout.
 4. Fix in one `update_layers` call with a list of updates.
+5. Carousels and series: one page per slide. Build the first, `duplicate` it into the same template (its page id once per copy), then change what every slide shares in one `update_layers` call with `page_ids` (up to 5 pages). The copies keep their layer ids; each page's result and preview come back in the reply.
 
 Calls are paid from the workspace's render credits; the guide, maths and measuring tools are free. Fewer, larger calls cost less.
 
@@ -43,7 +44,7 @@ Calls are paid from the workspace's render credits; the guide, maths and measuri
 
 - `set_template_info` last: a name, a one or two sentence description of the intent, audience and platforms, and a description per input with its length limit ("Headline: 2 lines, about 45 characters"). It saves every change.
 - Give the user the template's link or id, and tell them they can fill it with data in the Kalpana app or through the batch connection.
-- If a tool or the guide got in the way, call `send_feedback` with what happened and what would have helped. Leave out the user's content (copy, names, images, brand details). Skip it when nothing got in the way.
+- Feedback with `send_feedback`: when you hit a snag with a tool or the guide, send it then, while the details are fresh, with what happened and what would have helped. At the end, send anything else you have to report or suggest. Leave out the user's content (copy, names, images, brand details). Skip it when there is nothing to say.
 
 ## When something goes wrong
 
