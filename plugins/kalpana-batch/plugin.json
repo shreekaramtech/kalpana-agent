@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "kalpana-batch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generate ad creatives, product images and banners in bulk from a spreadsheet or product list: one finished image or video per row, for every product or campaign.",
   "author": {
     "name": "Shreekaram Technologies",

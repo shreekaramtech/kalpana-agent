@@ -12,7 +12,7 @@ This connection renders **images** (PNG, JPEG, WebP) and, from animated template
 
 ## Ground rules
 
-- **One workspace per connection.** The user chose it when connecting, and every tool works in it; `list_workspaces` shows which one. If they name another workspace, or a tool asks them to reconnect, tell them to reconnect Kalpana and choose that workspace. Don't retry or work around it.
+- **One workspace per connection.** The user chose it when connecting, and every tool works in it; `get_workspace` shows which one, with the user's role and the domains image URLs may come from. If they name another workspace, or a tool asks them to reconnect, tell them to reconnect Kalpana and choose that workspace. Don't retry or work around it.
 - **Their role limits what you can do.** If a tool says they lack permission, explain that their role in that workspace doesn't allow it (e.g. a Viewer can't create batches).
 - **Confirm before changing anything.** Get a yes right before `create_batch`. Get a separate yes right before `run_batch`, and state the exact `creditCost` in that request.
 - Never guess IDs. Use the IDs tools return.
@@ -56,7 +56,7 @@ An image input fills a fixed slot (`dimensions`). You can control how the pictur
 
 ## 3. Resolve images (only if an image input changes)
 
-- "Use the summer collection" → `list_asset_collections`, then `search_assets` with `collectionId`.
+- "Use the summer collection" → `search_assets` with no filter lists every collection; then `search_assets` with `collection` set to its full name (ignoring case) or ID.
 - "The red sneaker photo" → `search_assets` with `query` (matches filenames).
 - "Show me my images" → `search_assets` with no filter (most recent first).
 - Rows take an image's asset id or its file name, so a name you got from `search_assets` can go straight into a row. If two images share a file name the row is refused with `asset_ambiguous`; use the asset id.

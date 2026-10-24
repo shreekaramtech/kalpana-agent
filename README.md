@@ -69,9 +69,9 @@ Add a custom connector with either URL above. The client opens Kalpana's sign-in
 
 ## What the agent can do
 
-**Batch server (18 tools):** find templates and see their inputs (`search_templates`, `get_template_inputs`), find or add images (`list_asset_collections`, `search_assets`, `upload_images`, `inspect_image`), check rows before anything is created (`validate_batch`), create, edit, run and cancel batches (`create_batch`, `update_batch`, `update_job`, `run_batch`, `cancel_batch`, `cancel_job`), and follow them and fetch the results (`list_batches`, `get_batch`, `get_batch_jobs`, `get_batch_outputs`, `list_workspaces`). Running a batch spends render credits, always after the agent tells you the exact cost.
+**Batch server (17 tools):** find templates and see their inputs (`search_templates`, `get_template_inputs`), find or add images (`search_assets`, `upload_images`, `inspect_image`), check rows before anything is created (`validate_batch`), create, edit, run and cancel batches (`create_batch`, `update_batch`, `update_job`, `run_batch`, `cancel_batch`, `cancel_job`), and follow them and fetch the results (`list_batches`, `get_batch`, `get_batch_jobs`, `get_batch_outputs`, `get_workspace`). Running a batch spends render credits, always after the agent tells you the exact cost.
 
-**Designer server (41 tools):** build layer trees with layout flows, text, shapes, images, charts and motion; measure text, colour and geometry exactly; check layouts and render previews; save the template with its input descriptions. The full list is at [docs.kalpana.one/mcp/designer-tools](https://docs.kalpana.one/mcp/designer-tools).
+**Designer server (43 tools):** build layer trees with layout flows, text, shapes, images, charts and motion; measure text and geometry exactly; check layouts and render previews; save the template with its input descriptions. The full list is at [docs.kalpana.one/mcp/designer-tools](https://docs.kalpana.one/mcp/designer-tools).
 
 **Skills**
 
