@@ -7,7 +7,8 @@ This plugin connects your agent to Kalpana's hosted designer server and adds the
 1. Gather a short brief: the intent, the platforms and sizes, and the brand.
 2. Read the designer's guide, then build the whole design in a few calls.
 3. Check the layout and look at rendered previews before finishing.
-4. Save the template with a description of each input and its length limit.
+4. Join pages into videos with transitions (flows) when the work calls for one.
+5. Save the template with a description of each input and its length limit.
 
 ## What it connects to
 
@@ -17,7 +18,7 @@ This plugin connects your agent to Kalpana's hosted designer server and adds the
 
 ## Requirements
 
-A Kalpana account at [app.kalpana.one](https://app.kalpana.one) with an active plan. Designer calls are paid from the workspace's render credits; the guide and measuring tools are free.
+A Kalpana account at [app.kalpana.one](https://app.kalpana.one), on any plan. Designer calls are paid from the workspace's render credits; the guide and measuring tools are free.
 
 ## Links
 

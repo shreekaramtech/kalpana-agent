@@ -72,18 +72,18 @@ In Claude, add [Kalpana Batch](https://claude.ai/directory/kalpana-batch) or [Ka
 
 1. Create a free account at [app.kalpana.one](https://app.kalpana.one/signup). New accounts get free render credits.
 2. Add a template to a workspace, or let the designer make one.
-3. Connect. Sign-in is OAuth: you choose the workspace the agent works in, and your role there decides what it can do. No API key is pasted anywhere. The designer needs an active Kalpana plan.
+3. Connect. Sign-in is OAuth: you choose the workspace the agent works in, and your role there decides what it can do. No API key is pasted anywhere. Both servers work on every plan; their calls are paid from the workspace's render credits.
 
 ## What the agent can do
 
-**Batch server (17 tools):** find templates and see their inputs (`search_templates`, `get_template_inputs`), find or add images (`search_assets`, `upload_images`, `inspect_image`), check rows before anything is created (`validate_batch`), create, edit, run and cancel batches (`create_batch`, `update_batch`, `update_job`, `run_batch`, `cancel_batch`, `cancel_job`), and follow them and fetch the results (`list_batches`, `get_batch`, `get_batch_jobs`, `get_batch_outputs`, `get_workspace`). Running a batch spends render credits, always after the agent tells you the exact cost.
+**Batch server (17 tools):** find templates and see their inputs (`search_templates`, `get_template_inputs`), find, upload or import images from their URLs (`search_assets`, `upload_images`, `inspect_image`), check rows before anything is created (`validate_batch`), create, edit, run and cancel batches (`create_batch`, `update_batch`, `update_job`, `run_batch`, `cancel_batch`, `cancel_job`), and follow them and fetch the results (`list_batches`, `get_batch`, `get_batch_jobs`, `get_batch_outputs`, `get_workspace`). A batch renders each row on one page, on several pages (a carousel's slides, a campaign's sizes), or as a flow's video; images come out as PNG, JPEG, WebP or PDF, and videos as MP4, GIF, or transparent WebM and MOV. Running a batch spends render credits, always after the agent tells you the exact cost.
 
-**Designer server (43 tools):** build layer trees with layout flows, text, shapes, images, charts and motion; measure text and geometry exactly; check layouts and render previews; save the template with its input descriptions. The full list is at [docs.kalpana.one/mcp/designer-tools](https://docs.kalpana.one/mcp/designer-tools).
+**Designer server (47 tools):** build layer trees with layout flows, text, shapes, images, charts and motion; measure text and geometry exactly; check layouts and render previews; join pages into videos with transitions (`create_flow`, `list_flows`, `update_flow`, `delete_flow`); save the template with its input descriptions. The full list is at [docs.kalpana.one/mcp/designer-tools](https://docs.kalpana.one/mcp/designer-tools).
 
 **Skills**
 
 - `create-creative-batch`: find a template, map the user's data to its inputs, validate, create a draft, run it after confirming the credit cost, and share the results.
-- `design-a-template`: gather a brief, follow the designer's guide, build in few calls, check the render, and save the template ready for batches.
+- `design-a-template`: gather a brief, follow the designer's guide, build in few calls, check the render, join pages into flows when the work is a video, and save the template ready for batches.
 
 ## Layout
 

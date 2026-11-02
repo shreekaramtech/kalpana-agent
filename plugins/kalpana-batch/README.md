@@ -5,7 +5,7 @@ Fill your [Kalpana](https://kalpana.one) templates from a list or spreadsheet an
 This plugin connects your agent to Kalpana's hosted batch server and adds the `create-creative-batch` skill, which walks the agent through the safe flow:
 
 1. Find a template and read its inputs.
-2. Turn the user's list, spreadsheet or message into rows keyed by layer name.
+2. Turn the user's list, spreadsheet or message into rows keyed by layer name, rendered on one page, several pages or a flow's video.
 3. Check every row with `validate_batch` before anything is created.
 4. Create a draft batch and state its exact credit cost.
 5. Render it only after the user agrees to that cost, then share the finished files.

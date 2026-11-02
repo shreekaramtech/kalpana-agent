@@ -1,14 +1,22 @@
 ---
 name: create-creative-batch
 description: >-
-  Use whenever the user wants to work with Kalpana: browse or find design templates, turn a list or spreadsheet into personalized images (one design per row), pick images from their asset library, or check on batches and download finished designs. Covers building renderer-ready rows, validating them, creating a batch, running it with credit confirmation, and handling access errors.
+  Use whenever the user wants to work with Kalpana: browse or find design templates, turn a list or spreadsheet into personalized images or videos (one design per row, on one or more pages, or as a flow's video), pick or import images for their asset library, or check on batches and download finished designs. Covers building renderer-ready rows, validating them, creating a batch, running it with credit confirmation, and handling access errors.
 ---
 
 # Kalpana: templates to personalized designs
 
 Kalpana turns one template into many designs: each **row** of a **batch** fills the template's inputs (text, images) and renders one image. You fill templates; you never edit designs.
 
-This connection renders **images** (PNG, JPEG, WebP) and, from animated templates, **videos** (MP4, GIF): `create_batch` with `outputFormat` mp4 or gif renders each row's whole motion, and costs credits by the video's length and size. An animated template rendered as an image shows one moment of its motion (`stillTime`). Layout, font and design changes happen in the Kalpana app or through the Kalpana designer connection, not here; a template's ID is the same on both.
+This connection renders **images** (PNG, JPEG, WebP, or a vector PDF page) and, from animated templates, **videos**: `create_batch` with `outputFormat` mp4 or gif renders each row's whole motion, and webm or mov renders it as a transparent video for overlaying on other footage. Videos cost credits by their length and size. An animated template rendered as an image shows one moment of its motion (`stillTime`). Layout, font and design changes happen in the Kalpana app or through the Kalpana designer connection, not here.
+
+Three ids matter, and they are not interchangeable:
+
+- **templateId**: the whole template, from `search_templates`.
+- **pageIds**: its pages, each one canvas with its own inputs (a size, a carousel slide).
+- **flowIds**: its flows, each a video joining some of its pages with transitions.
+
+`get_template_inputs` lists a template's pages and flows. A batch takes that template's own pageIds or flowIds, never another's. The ids are the same on the designer connection.
 
 ## Ground rules
 
@@ -26,7 +34,11 @@ This connection renders **images** (PNG, JPEG, WebP) and, from animated template
 
 ## 2. Learn its inputs
 
-Call `get_template_inputs`. If it reports that the template is animated, tell the user and share the link it gives; don't look for a workaround. Each input has a `key`, an `id`, a `label`, a `type` (`text` or `image`), an optional `defaultValue`, and image `dimensions`. `rowExample` is a whole ready row.
+Call `get_template_inputs`. Each input has a `key`, an `id`, a `label`, a `type` (`text` or `image`), an optional `defaultValue`, and image `dimensions`. `rowExample` is a whole ready row. Inputs the author turned off or put on hidden layers are left out and named in `omittedInputs`; their template text still renders, so check it (dates, terms, links) when the copy changes theme.
+
+- **Pages.** Each page has its own inputs. Without `pageId` you get the first page's; pass `pageId` for another. When the user wants every size or every carousel slide, read each page they want.
+- **Flows.** With `flowId` you get one video's inputs, one per layer name across its pages. A video's inputs are keyed by page, as `page2@title`; a plain `title` fills every page that has no column of its own.
+- **Animated templates.** The result gives the `duration` and, when the designer set one, the `stillTime`. For images, each row shows that moment, else the last frame. If no still time is set, ask the user which moment to use, because an outro or a loop can make the last frame a bad image. For video, offer the template's flows, or the page's own motion with a video `outputFormat`.
 
 Rows are keyed by each input's **`key`**: the layer's name (case doesn't matter) or its id. Values are plain. Include only the inputs you're changing; anything left out keeps the template default.
 
@@ -61,7 +73,11 @@ An image input fills a fixed slot (`dimensions`). You can control how the pictur
 - "Show me my images" → `search_assets` with no filter (most recent first).
 - Rows take an image's asset id or its file name, so a name you got from `search_assets` can go straight into a row. If two images share a file name the row is refused with `asset_ambiguous`; use the asset id.
 - Confirm your picks by showing their previews or checking them with `inspect_image`, especially against the input's `dimensions`. A tall photo in a wide slot will crop; use `fit`, `zoom` and `panX`/`panY` (above) to fix it.
-- An image that isn't in Kalpana yet: `upload_images` with no files gives a link for the user to drop it into (then `search_assets` finds it). If you hold the files yourself, pass `files`, PUT each to its `uploadUrl`, then call again with `done`; the reply gives each image's `id`, the asset id a row takes. Confirm before uploading.
+- An image that isn't in Kalpana yet, confirming before you add it:
+  - Already online (a product photo from a store): pass its address in `urls` (up to 20 a call, 5 MB each). Kalpana fetches and records it, and the reply gives its `id`. The URL's host must be on the workspace's domain whitelist (`get_workspace` lists it; cdn.shopify.com is on it by default). A refused URL comes back in `failed` with a link to the settings page where an admin adds the domain.
+  - On the user's computer: `upload_images` with no files gives a link for the user to drop it into (then `search_assets` finds it).
+  - Files you hold yourself: pass `files`, PUT each to its `uploadUrl`, then call again with `done`; the reply gives each image's `id`, the asset id a row takes.
+  - Pass `collection` to put the images in a collection; it is made when none has that name.
 
 ## 4. Build rows from the user's data
 
@@ -72,10 +88,15 @@ An image input fills a fixed slot (`dimensions`). You can control how the pictur
 
 ## 5. Validate, create, run
 
-1. `validate_batch` with the rows. Fix the reported `issues` (by `rowIndex`, `field` and `code`), or ask the user for missing values. Repeat until valid. Check `rows` in the result: it shows each row as the server understood it, with images resolved to an asset id and file name. If `sharedNames` is present, tell the user which layer names are shared.
-2. Summarize: template, workspace, row count, what changes versus stays default, and output format (png default; jpeg/webp on request). Get confirmation, then call `create_batch` with a clear `name`. This makes a draft; nothing renders and no credits are spent.
-3. Tell the user the batch was created and its `creditCost`. Ask whether to start rendering. Only after an explicit yes, call `run_batch`.
+1. Choose what each row renders:
+   - **One page** (the default): one file per row.
+   - **Several pages** (`pageIds`, up to 20): one file per row per page, such as a carousel's slides or a campaign's sizes. A row may carry keys of any of these pages; each page takes the keys it has.
+   - **Flows** (`flowIds` instead of `pageIds`): one video per row per flow, with a video `outputFormat`.
+2. `validate_batch` with the rows and the same `pageIds` or `flowIds`. Fix the reported `issues` (by `rowIndex`, `field` and `code`), or ask the user for missing values. Repeat until valid. Check `rows` in the result: it shows each row as the server understood it, with images resolved to an asset id and file name. If `sharedNames` is present, tell the user which layer names are shared.
+3. Summarize: template, workspace, row count, pages or flows, what changes versus stays default, and output format (png default; jpeg, webp or pdf for images; mp4 or gif for video, webm or mov for transparent video). Get confirmation, then call `create_batch` with a clear `name`. This makes a draft; nothing renders and no credits are spent. Pass any `warnings` on to the user: a flow longer than 60 seconds renders only its first 60.
+4. Tell the user the batch was created and its `creditCost`. Ask whether to start rendering. Only after an explicit yes, call `run_batch`.
    - Not enough credits: say so plainly and suggest topping up in Kalpana. The draft stays available to run later.
+   - The workspace's webhook endpoints receive the results unless `run_batch` gets `webhooks: false`; pass it only when the user asks.
 
 ## 6. Status and results
 

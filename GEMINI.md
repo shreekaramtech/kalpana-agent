@@ -2,10 +2,10 @@
 
 Kalpana turns templates into finished creatives in bulk. This extension connects two hosted MCP servers:
 
-- `kalpana-designer` designs and edits templates: layers, layout flows, text, images, charts and motion. It needs an active Kalpana plan.
-- `kalpana-batch` fills templates with data and renders images and videos, one per row of a batch.
+- `kalpana-designer` designs and edits templates: layers, layout flows, text, images, charts and motion, and flows that join a template's pages into a video.
+- `kalpana-batch` fills templates with data and renders images and videos, one per row of a batch for each page or flow.
 
-A template's id is the same on both.
+A template's id, its page ids and its flow ids are the same on both.
 
 ## Signing in
 

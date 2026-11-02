@@ -1,12 +1,14 @@
 ---
 name: design-a-template
 description: >-
-  Use whenever the user wants Kalpana to design or change a template: a social post, banner, ad, carousel, slide or story, a new size of an existing design, or motion on a design. Covers gathering a brief, reading the designer's guide, building in few calls, checking the render, saving the template and handing it to the batch connection.
+  Use whenever the user wants Kalpana to design or change a template: a social post, banner, ad, carousel, slide or story, a new size of an existing design, motion on a design, or a video joining a template's pages (a flow). Covers gathering a brief, reading the designer's guide, building in few calls, checking the render, saving the template and handing it to the batch connection.
 ---
 
 # Kalpana: designing templates
 
-The Kalpana designer connection builds editable templates in the user's workspace. Every text and image layer becomes an input that batches fill later, so a good template works for any row, not just the sample. Filling templates with data and rendering images is the batch connection's job (`create-creative-batch`); a template's id is the same on both.
+The Kalpana designer connection builds editable templates in the user's workspace. Every text and image layer becomes an input that batches fill later, so a good template works for any row, not just the sample. Filling templates with data and rendering images and videos is the batch connection's job (`create-creative-batch`).
+
+Three ids matter, and they are not interchangeable: `template_id` (the whole creative), `page_id` (one canvas of it, which the design tools take) and `flow_id` (a video joining some of its pages). They are the same on both connections.
 
 ## 1. Brief first
 
@@ -33,6 +35,19 @@ Call `design_guide` once before the first design. It is the source of truth for 
 
 Calls are paid from the workspace's render credits; the guide, maths and measuring tools are free. Fewer, larger calls cost less.
 
+To change an existing template, `search_templates` finds it and `list_pages` gives each page's `page_id`. To start over in a template, add the new page first (`create_design` with its `template_id`), then `delete_pages` the old ones: a template keeps at least one page.
+
+## Motion and flows
+
+- A template with motion still fills batches as images, each showing one moment. Set that moment with `set_timeline` `still_time`; without it, batches use the last frame, which an outro or a loop can spoil.
+- Check motion as frames (`render_contact_sheet`, `render_timeline`). This connection exports no video; videos render in the Kalpana app or through the batch connection.
+- A **flow** joins some of a template's pages into one video: a carousel or a set of slides becomes a video this way. A template can have any number of flows, each with its own pages and order. Build the pages and their motion first, then `create_flow` with the pages in order.
+- Leave each step's `hold` out unless the user wants a fixed time; a page then holds for its own duration.
+- Choose each transition for its moment, not one for all, and read the guide's Flows section for the types. `morph` needs layers with the same name on both pages; give colour transitions a colour from the design.
+- Videos stop at 60 seconds. A longer flow is saved with a `warning`, but only its first 60 seconds render; tell the user.
+- `update_flow` `steps` replaces the whole list, so read it with `list_flows` first. Ask before `delete_flow`.
+- Rows fill a flow by layer name, so a name shared across its pages takes one value. For a value per page, keep the names different.
+
 ## 4. Check before you finish
 
 - Fix every `layout_issues` entry an edit returns.
@@ -55,12 +70,13 @@ Example: white on #FF5A1F. Channels 255, 90, 31 give linear 1, 0.102, 0.0137, so
 ## 5. Save and hand over
 
 - `set_template_info` last: a name, a one or two sentence description of the intent, audience and platforms, and a description per input with its length limit ("Headline: 2 lines, about 45 characters"). It saves every change.
-- Give the user the template's link or id, and tell them they can fill it with data in the Kalpana app or through the batch connection.
+- Give the user the template's link or id, and any flow's id and name, and tell them they can fill it with data in the Kalpana app or through the batch connection.
 - Feedback with `send_feedback`: when you hit a snag with a tool or the guide, send it then, while the details are fresh, with what happened and what would have helped. At the end, send anything else you have to report or suggest. Leave out the user's content (copy, names, images, brand details). Skip it when there is nothing to say.
 
 ## When something goes wrong
 
 - `undo` reverts the latest change of a design.
 - "was changed in Kalpana": someone edited it in the app. Read it with `get_design` before the next change.
-- "needs an active subscription" or "need render credits": tell the user where to fix it in Kalpana and stop.
+- "need render credits": the workspace has no credits left for designer calls. Tell the user they can subscribe or top up in Kalpana, and stop.
+- An image URL refused for its host: `get_workspace` lists the allowed domains. Tell the user to add the domain in Workspace Settings > Domain Whitelisting, or upload the image with `upload_images`.
 - A connection covers one workspace. If the user names another, ask them to reconnect and choose it.
