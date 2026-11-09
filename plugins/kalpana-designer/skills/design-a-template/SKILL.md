@@ -23,7 +23,7 @@ Take what the user already said; ask only for what this kind of work needs, in o
 
 ## 2. Read the guide
 
-Call `design_guide` once before the first design. It is the source of truth for the model, layout flows, text sizing, naming, motion and what is free or paid. Follow it over anything here.
+Call `design_guide` first. It returns a short core, which is the source of truth for the model, layout flows, text sizing, naming and what is free or paid. It ends with a list of topics (brief, ad, carousel, sizes, motion, flows, batch and others). Read every topic your job needs in one more `design_guide` call with `topics`, before you build, not one at a time. Follow the guide over anything here.
 
 ## 3. Build in few calls
 
@@ -33,7 +33,7 @@ Call `design_guide` once before the first design. It is the source of truth for 
 4. Fix in one `update_layers` call with a list of updates.
 5. Carousels and series: one page per slide. Build the first, `duplicate` it into the same template (its page id once per copy), then change what every slide shares in one `update_layers` call with `page_ids` (up to 5 pages). The copies keep their layer ids; each page's result and preview come back in the reply.
 
-Calls are paid from the workspace's render credits; the guide, maths and measuring tools are free. Fewer, larger calls cost less.
+Calls that make a design (add or change layers or motion) or draw it (`render_design`, `render_contact_sheet`, `render_timeline`, a `preview` option, the sheet `find_images` draws) are paid from the workspace's render credits. Reads, `check_layout`, the helpers (`calculate`, `measure_text`, `place_items`, `stagger_times`, `shape_path`) and housekeeping (`duplicate`, `rename_page`, `delete_pages`, `undo`, the flow tools, `set_template_info`) are free, so read and check before you render. Fewer, larger calls cost less.
 
 To change an existing template, `search_templates` finds it and `list_pages` gives each page's `page_id`. To start over in a template, add the new page first (`create_design` with its `template_id`), then `delete_pages` the old ones: a template keeps at least one page.
 
@@ -51,7 +51,7 @@ To change an existing template, `search_templates` finds it and `list_pages` giv
 ## 4. Check before you finish
 
 - Fix every `layout_issues` entry an edit returns.
-- Run `check_layout`, then look at a preview (`preview: true` on the last edit, or `render_design`, zoomed with `node_id` for small text). Confirm a reported problem in the picture before changing the design.
+- Run `check_layout`, then look at a preview (`preview: true` on the last edit, or `render_design`, zoomed with `node_id` for small text; it draws several pages and close-ups in one call, so check a carousel or every size at once). `check_layout` reports cut-off text as an error: fix it. Confirm a reported problem in the picture before changing the design.
 - Try the longest copy you expect in the text layers, render, then put the sample copy back.
 - For other sizes, `duplicate` the finished page with the new width and height, render it, and change only what that size needs.
 
@@ -70,6 +70,7 @@ Example: white on #FF5A1F. Channels 255, 90, 31 give linear 1, 0.102, 0.0137, so
 ## 5. Save and hand over
 
 - `set_template_info` last: a name, a one or two sentence description of the intent, audience and platforms, and a description per input with its length limit ("Headline: 2 lines, about 45 characters"). It saves every change.
+- Every text and image layer is a batch input until you fix it. Pass `fixed` (layer id or name to `true`) for text that never changes per row, such as slide numbers, swipe cues and labels; `false` makes a layer an input again. Fixed layers are not offered to agents or in the batch builder.
 - Give the user the template's link or id, and any flow's id and name, and tell them they can fill it with data in the Kalpana app or through the batch connection.
 - Feedback with `send_feedback`: when you hit a snag with a tool or the guide, send it then, while the details are fresh, with what happened and what would have helped. At the end, send anything else you have to report or suggest. Leave out the user's content (copy, names, images, brand details). Skip it when there is nothing to say.
 

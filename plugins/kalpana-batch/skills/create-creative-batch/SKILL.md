@@ -98,8 +98,18 @@ An image input fills a fixed slot (`dimensions`). You can control how the pictur
    - Not enough credits: say so plainly and suggest topping up in Kalpana. The draft stays available to run later.
    - The workspace's webhook endpoints receive the results unless `run_batch` gets `webhooks: false`; pass it only when the user asks.
 
+### One file, no batch
+
+When the user wants a single creative now ("make me one for Priya"), skip the batch: `create_job` fills one page (`pageId`) or one flow (`flowId`, a video) with one row, keyed and valued as batch rows are, and takes `outputFormat`, `stillTime` and `fileName`. Validate the row the same way (`validate_batch` with one row) first.
+
+- `run: false` (the default) saves a `pending` job and spends nothing. `run: true` renders at once and spends the job's `creditCost` when it succeeds. As with `run_batch`, state the exact `creditCost` and get a yes before `run: true` or `run_job`.
+- The reply waits up to 30 seconds for the file. A job still rendering comes back as `processing`: call `get_job` a few seconds later instead of calling `create_job` again, which would make a second job.
+- `run_job` renders a pending job, and renders a failed one again (failed renders are not charged). Calling it on a job that is rendering, done or cancelled changes nothing and charges nothing.
+- A finished job's `output.url` is the file. `batchId` adds the job to an existing batch.
+
 ## 6. Status and results
 
+- "How's my file?" (a single job) → `get_job`.
 - "How's my batch?" → `get_batch`. Report completed / failed / processing out of the total. Don't poll in a tight loop; check again when the user asks, or at most a few times with pauses.
 - "What have I run lately?" → `list_batches` (filter by `templateId` if given).
 - "Show me the results" → `get_batch_outputs` (paged, up to 20). Share the download links, and use `inspect_image` on one or two if the user wants you to review them. Report failed rows rather than hiding them.
