@@ -18,7 +18,7 @@ This plugin connects your agent to Kalpana's hosted designer server and adds the
 
 ## Requirements
 
-A Kalpana account at [app.kalpana.one](https://app.kalpana.one), on any plan. Designer calls are paid from the workspace's render credits; the guide and measuring tools are free.
+A Kalpana account at [app.kalpana.one](https://app.kalpana.one), on any plan. Calls that make or draw a design are paid from the workspace's render credits; reads, checks, measuring tools and housekeeping are free.
 
 ## Links
 
