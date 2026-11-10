@@ -8,15 +8,17 @@ description: >-
 
 Kalpana turns one template into many designs: each **row** of a **batch** fills the template's inputs (text, images) and renders one image. You fill templates; you never edit designs.
 
-This connection renders **images** (PNG, JPEG, WebP, or a vector PDF page) and, from animated templates, **videos**: `create_batch` with `outputFormat` mp4 or gif renders each row's whole motion, and webm or mov renders it as a transparent video for overlaying on other footage. Videos cost credits by their length and size. An animated template rendered as an image shows one moment of its motion (`stillTime`). Layout, font and design changes happen in the Kalpana app or through the Kalpana designer connection, not here.
+This connection renders **images** (PNG, JPEG, WebP, or a vector PDF page) and, from animated templates, **videos**: a row whose `output.format` is mp4 or gif renders its whole motion, and webm or mov renders it as a transparent video for overlaying on other footage. Videos cost credits by their length and size. An animated template rendered as an image shows one moment of its motion (`output.stillTime`). Layout, font and design changes happen in the Kalpana app or through the Kalpana designer connection, not here.
 
 Three ids matter, and they are not interchangeable:
 
 - **templateId**: the whole template, from `search_templates`.
-- **pageIds**: its pages, each one canvas with its own inputs (a size, a carousel slide).
-- **flowIds**: its flows, each a video joining some of its pages with transitions.
+- **page ids**: its pages, each one canvas with its own inputs (a size, a carousel slide).
+- **flow ids**: its flows, each a video joining some of its pages with transitions.
 
-`get_template_inputs` lists a template's pages and flows. A batch takes that template's own pageIds or flowIds, never another's. The ids are the same on the designer connection.
+`get_template_inputs` lists a template's pages and flows. Ids are opaque text (short for newer templates, a UUID for older ones): copy them exactly, never shorten, parse or make one up. They are the same on the designer connection.
+
+A batch renders exactly one of: `pages` (page ids, up to 20, from any templates), `templates` (template ids, up to 20; every page of each) or `flow` (one flow id, rendered as a video).
 
 ## Ground rules
 
@@ -34,13 +36,13 @@ Three ids matter, and they are not interchangeable:
 
 ## 2. Learn its inputs
 
-Call `get_template_inputs`. Each input has a `key`, an `id`, a `label`, a `type` (`text` or `image`), an optional `defaultValue`, and image `dimensions`. `rowExample` is a whole ready row. Inputs the author turned off or put on hidden layers are left out and named in `omittedInputs`; their template text still renders, so check it (dates, terms, links) when the copy changes theme.
+Call `get_template_inputs`. Each input has a `key`, an `id`, a `label`, a `type` (`text` or `image`), an optional `defaultValue`, and image `dimensions`. `rowExample` is ready modifications to copy and edit. Inputs the author turned off or put on hidden layers are left out and named in `omittedInputs`; their template text still renders, so check it (dates, terms, links) when the copy changes theme.
 
 - **Pages.** Each page has its own inputs. Without `pageId` you get the first page's; pass `pageId` for another. When the user wants every size or every carousel slide, read each page they want.
-- **Flows.** With `flowId` you get one video's inputs, one per layer name across its pages. A video's inputs are keyed by page, as `page2@title`; a plain `title` fills every page that has no column of its own.
-- **Animated templates.** The result gives the `duration` and, when the designer set one, the `stillTime`. For images, each row shows that moment, else the last frame. If no still time is set, ask the user which moment to use, because an outro or a loop can make the last frame a bad image. For video, offer the template's flows, or the page's own motion with a video `outputFormat`.
+- **Flows.** With `flowId` you get one video's inputs, one per layer name across its pages. A video's inputs are keyed by page, as `<pageId>@title`; a plain `title` fills every page that has no key of its own. `<pageId>#2@title` fills a page's second visit in the video.
+- **Animated templates.** The result gives the `duration` and, when the designer set one, the `stillTime`. For images, each row shows that moment, else the last frame. If no still time is set, ask the user which moment to use, because an outro or a loop can make the last frame a bad image. For video, offer the template's flows, or the page's own motion with a video `output.format`.
 
-Rows are keyed by each input's **`key`**: the layer's name (case doesn't matter) or its id. Values are plain. Include only the inputs you're changing; anything left out keeps the template default.
+A row's `modifications` are keyed by each input's **`key`**: the layer's name (case doesn't matter) or its id. Values are plain. Include only the inputs you're changing; anything left out keeps the page's own value, and `null` sets one back to it. With several pages, a plain key fills every page that has that layer (a key no page has is refused), and `<pageId>@Headline` fills one page only.
 
 ```json
 { "Headline": "Flat 40% off", "Product photo": "red-sneaker.jpg" }
@@ -83,34 +85,43 @@ An image input fills a fixed slot (`dimensions`). You can control how the pictur
 
 - A pasted list, table or CSV becomes one row per entry. Map each column to an input by meaning (label and description), and state the mapping back briefly: "Name → headline, Price → price_tag".
 - Ask about columns that match no input, and about inputs the user may want filled but gave no data for. Never invent values.
-- Maximum 500 rows per batch. For more, split into batches and say so.
-- For a sheet with many rows, send `columns` (the layer keys, like the sheet's header) and each row as an array of cells in that order; it keeps the request small. Put values that are the same on every row (a logo, a call to action) in `defaults` once. A `null` cell keeps the template's own value.
+- Maximum 1,000 rows per batch. For more, split into batches and say so.
+- Each row is an object `{ modifications, output }`. There are no `columns` or `defaults`: put a value that is the same on every row (a logo, a call to action) in each row's `modifications`, or leave it out to keep the page's own.
+- `output` is optional per row: `{ format, fileName, stillTime }`. `format` is png (default), jpeg, webp or pdf for images, and mp4, gif, webm or mov for video; `fileName` has no extension; `stillTime` (seconds) picks the moment of an animated page for an image and is refused with a video format.
 
 ## 5. Validate, create, run
 
-1. Choose what each row renders:
-   - **One page** (the default): one file per row.
-   - **Several pages** (`pageIds`, up to 20): one file per row per page, such as a carousel's slides or a campaign's sizes. A row may carry keys of any of these pages; each page takes the keys it has.
-   - **Flows** (`flowIds` instead of `pageIds`): one video per row per flow, with a video `outputFormat`.
-2. `validate_batch` with the rows and the same `pageIds` or `flowIds`. Fix the reported `issues` (by `rowIndex`, `field` and `code`), or ask the user for missing values. Repeat until valid. Check `rows` in the result: it shows each row as the server understood it, with images resolved to an asset id and file name. If `sharedNames` is present, tell the user which layer names are shared.
-3. Summarize: template, workspace, row count, pages or flows, what changes versus stays default, and output format (png default; jpeg, webp or pdf for images; mp4 or gif for video, webm or mov for transparent video). Get confirmation, then call `create_batch` with a clear `name`. This makes a draft; nothing renders and no credits are spent. Pass any `warnings` on to the user: a flow longer than 60 seconds renders only its first 60.
-4. Tell the user the batch was created and its `creditCost`. Ask whether to start rendering. Only after an explicit yes, call `run_batch`.
+1. Choose what each row renders (exactly one of these):
+   - **`pages`** (up to 20 page ids): one file per row per page. One page gives one file per row; several give a carousel's slides or a campaign's sizes. A row may carry keys of any of these pages.
+   - **`templates`** (up to 20 template ids): every page of each template, in page order.
+   - **`flow`** (one flow id): one video per row, with a video `output.format`.
+2. `validate_batch` with the rows and the same `pages`, `templates` or `flow`. Fix the reported `issues` (by `row`, `field` and `code`), or ask the user for missing values. Repeat until valid. Check `rows` in the result: it shows each row as the server understood it on each page, with images resolved to an asset id and file name. It also gives `jobCount` (one job per row per page) and `creditCost`.
+3. Summarize: workspace, row count, pages or flow, job count, what changes versus stays default, and output format. Get confirmation, then call `create_batch` with a clear `name`. This makes a draft; nothing renders and no credits are spent. One invalid row rejects the whole request, and repeating a call makes a second batch. Pass any `warnings` on to the user: a flow longer than 60 seconds renders only its first 60.
+4. Tell the user the batch was created, with its `jobCount` and `creditCost`. Ask whether to start rendering. Only after an explicit yes, call `run_batch`.
    - Not enough credits: say so plainly and suggest topping up in Kalpana. The draft stays available to run later.
    - The workspace's webhook endpoints receive the results unless `run_batch` gets `webhooks: false`; pass it only when the user asks.
 
-### One file, no batch
+### A few files, no batch
 
-When the user wants a single creative now ("make me one for Priya"), skip the batch: `create_job` fills one page (`pageId`) or one flow (`flowId`, a video) with one row, keyed and valued as batch rows are, and takes `outputFormat`, `stillTime` and `fileName`. Validate the row the same way (`validate_batch` with one row) first.
+For a handful of creatives now, skip the batch: `create_job` saves up to 10 jobs, each with a `page` (or a `flow`, a video), its own `modifications` and an optional `output`. Check the values the same way first (`validate_batch` with the same target). For more rows, use `create_batch`.
 
-- `run: false` (the default) saves a `pending` job and spends nothing. `run: true` renders at once and spends the job's `creditCost` when it succeeds. As with `run_batch`, state the exact `creditCost` and get a yes before `run: true` or `run_job`.
-- The reply waits up to 30 seconds for the file. A job still rendering comes back as `processing`: call `get_job` a few seconds later instead of calling `create_job` again, which would make a second job.
-- `run_job` renders a pending job, and renders a failed one again (failed renders are not charged). Calling it on a job that is rendering, done or cancelled changes nothing and charges nothing.
-- A finished job's `output.url` is the file. `batchId` adds the job to an existing batch.
+- `run: false` (the default) saves the jobs as `pending` and spends nothing. `run: true` renders them at once and spends their `creditCost` as each succeeds (failed renders are not charged; the request is refused when the credits don't cover it). As with `run_batch`, state the exact `creditCost` and get a yes before `run: true` or `run_job`.
+- The reply, `{ status, jobs }`, waits up to 30 seconds for the files. A job still rendering comes back as `processing`: call `get_job` a few seconds later. Do not call `create_job` again, because every call makes new jobs. After an error, check `get_job` or `get_batch_jobs` before retrying.
+- `run_job` renders one pending job, or a failed one again. A job that is rendering, done or cancelled is refused, so repeating the call never charges twice.
+- A finished job's `file.url` is the download link. `batch` adds the jobs to an existing batch.
+
+### Changing a draft
+
+Only `pending` jobs without a file can change.
+
+- `update_job` (one job) and `update_batch` (several, from the ids in `get_batch_jobs`): `modifications` hold only the layers to change (`null` clears one back to the page's value) and `output` only the fields to change. `update_batch` can also rename the batch, `add` rows (as `create_batch` does; repeating duplicates them) and `remove` pending jobs permanently. Adding or removing jobs changes the cost, so say so before `run_batch`. Nothing renders until `run_batch`.
+- `cancel_batch` and `cancel_job` stop unfinished jobs, which are not charged. Cancelled jobs are final: to render them again, create a new batch with those rows.
 
 ## 6. Status and results
 
 - "How's my file?" (a single job) → `get_job`.
-- "How's my batch?" → `get_batch`. Report completed / failed / processing out of the total. Don't poll in a tight loop; check again when the user asks, or at most a few times with pauses.
+- "Show the rows of a batch" → `get_batch_jobs` (paged), with each job's modifications, status and error.
+- "How's my batch?" → `get_batch`. `get_batch` and `list_batches` count jobs (one per row per page), so 10 rows on 3 pages is 30 jobs. Report succeeded / failed / processing out of the total. Don't poll in a tight loop; check again when the user asks, or at most a few times with pauses.
 - "What have I run lately?" → `list_batches` (filter by `templateId` if given).
 - "Show me the results" → `get_batch_outputs` (paged, up to 20). Share the download links, and use `inspect_image` on one or two if the user wants you to review them. Report failed rows rather than hiding them.
 
